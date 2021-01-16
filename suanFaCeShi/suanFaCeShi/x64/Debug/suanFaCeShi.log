@@ -1,0 +1,6 @@
+﻿  Source.cpp
+  leetcode.cpp
+  Generating Code...
+leetcode.obj : error LNK2005: "public: __cdecl leetcode::leetcode(void)" (??0leetcode@@QEAA@XZ) already defined in Source.obj
+leetcode.obj : error LNK2005: "public: __cdecl leetcode::~leetcode(void)" (??1leetcode@@QEAA@XZ) already defined in Source.obj
+D:\Users\wy\source\repos\suanFaCeShi\x64\Debug\suanFaCeShi.exe : fatal error LNK1169: one or more multiply defined symbols found

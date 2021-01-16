@@ -1,0 +1,29 @@
+﻿生成启动时间为 2021/1/15 18:09:11。
+     1>项目“E:\leetCode\SuanFaCeShi\suanFaCeShi\suanFaCeShi\suanFaCeShi.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp leetcode.cpp
+         leetcode.cpp
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\leetcode.cpp(61): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\leetcode.cpp(82): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\leetcode.cpp(151): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\leetcode.cpp(202): warning C4244: “return”: 从“double”转换到“int”，可能丢失数据
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\leetcode.cpp(210): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\leetcode.cpp(509): warning C4244: “+=”: 从“double”转换到“int”，可能丢失数据
+         Source.cpp
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\source.cpp(104): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\source.cpp(123): warning C4018: “<=”: 有符号/无符号不匹配
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\source.cpp(127): warning C4018: “<=”: 有符号/无符号不匹配
+     1>e:\leetcode\suanfaceshi\suanfaceshi\suanfaceshi\source.cpp(127): warning C4018: “<”: 有符号/无符号不匹配
+         正在生成代码...
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\leetCode\SuanFaCeShi\suanFaCeShi\suanFaCeShi\Debug\suanFaCeShi.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\leetCode\SuanFaCeShi\suanFaCeShi\suanFaCeShi\Debug\suanFaCeShi.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\leetCode\SuanFaCeShi\suanFaCeShi\suanFaCeShi\Debug\suanFaCeShi.lib" /MACHINE:X86 Debug\ContiguousList.obj
+         Debug\linkedList.obj
+         Debug\Source.obj
+         Debug\leetcode.obj
+         Debug\jianZhiOffer.obj
+         suanFaCeShi.vcxproj -> E:\leetCode\SuanFaCeShi\suanFaCeShi\suanFaCeShi\Debug\suanFaCeShi.exe
+     1>已完成生成项目“E:\leetCode\SuanFaCeShi\suanFaCeShi\suanFaCeShi\suanFaCeShi.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:01.94
