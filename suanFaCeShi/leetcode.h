@@ -180,9 +180,30 @@ public:
 #pragma endregion
 
 
+#pragma region 27.移除元素
+	//解法1：双层循环暴力解法
+	int removeElement(vector<int>& nums, int val);
+
+	//解法2：双指针法
+	int removeElementSzz(vector<int>& nums, int val);
+#pragma endregion
 
 
+#pragma region 628.三个数的最大乘积
+	int maximumProduct(vector<int>& nums);
 
+	/*解法2：线性扫描
+	* 
+	* 我们实际上只要求出数组中最大的三个数以及最小的两个数，因此我们可以不用排序，用线性扫描直接得出这五个数。
+	*/
+	int maximumProduct2(vector<int>& nums);
+#pragma endregion
+
+#pragma region 50.pow(x,n)
+	double myPow(double x, int n);
+
+	double quickMul(double x, long long N);
+#pragma endregion
 
 
 

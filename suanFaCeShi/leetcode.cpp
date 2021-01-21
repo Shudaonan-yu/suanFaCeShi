@@ -1,4 +1,4 @@
-#include "leetcode.h"
+ï»¿#include "leetcode.h"
 #include<string>
 #include <stack>
 #include<unordered_set>
@@ -16,13 +16,13 @@ leetcode::~leetcode()
 {
 
 }
-#pragma region Á¦¿ÛËã·¨Ìâ¿âµÚ389Ìâ
+#pragma region åŠ›æ‰£ç®—æ³•é¢˜åº“ç¬¬389é¢˜
 
-//½â·¨1£¬ÀûÓÃÒì»òÔËËã£¬ÀûÓÃÁËa^b^c^a^b^c^d =dµÄĞËÖÂ¡£
-//×¢ÒâÒª½²×Ö·û´®×ª»¯Îª×Ö·û*/
+//è§£æ³•1ï¼Œåˆ©ç”¨å¼‚æˆ–è¿ç®—ï¼Œåˆ©ç”¨äº†a^b^c^a^b^c^d =dçš„å…´è‡´ã€‚
+//æ³¨æ„è¦è®²å­—ç¬¦ä¸²è½¬åŒ–ä¸ºå­—ç¬¦*/
 char leetcode::findTheDifference(string s, string t) {
 	int ret = 0;
-	for (char ch : s) {  //Ğ´³É char &ch :s ¿ÉÒÔ±ğÔ­Ğ´·¨½ÚÔ¼ÄÚ´æ£¬Ô­ÒòÊÇ&chÖ±½ÓÔÚÔ­×Ö·û´®sÉÏ½øĞĞ±éÀú£¬Ô­Ğ´·¨Òª¸´ÖÆ³ö¸ösÔÙ½øĞĞ±éÀú²Ù×÷
+	for (char ch : s) {  //å†™æˆ char &ch :s å¯ä»¥åˆ«åŸå†™æ³•èŠ‚çº¦å†…å­˜ï¼ŒåŸå› æ˜¯&chç›´æ¥åœ¨åŸå­—ç¬¦ä¸²sä¸Šè¿›è¡Œéå†ï¼ŒåŸå†™æ³•è¦å¤åˆ¶å‡ºä¸ªså†è¿›è¡Œéå†æ“ä½œ
 		ret ^= ch;
 	}
 	for (char ch : t) {
@@ -31,8 +31,8 @@ char leetcode::findTheDifference(string s, string t) {
 	return ret;
 }
 
-////½â·¨2£¬ÀûÓÃ½«Ã¿¸ö×Ö·ûµÄasciiÂëÇóºÍ£¬È»ºóÓÃ×Ö·û´®1µÄ
-////ºÍ¼õÈ¥×Ö·û´®2µÄºÍ¼È´ú±íÁË±»Ìí¼ÓµÄ×Ö·û
+////è§£æ³•2ï¼Œåˆ©ç”¨å°†æ¯ä¸ªå­—ç¬¦çš„asciiç æ±‚å’Œï¼Œç„¶åç”¨å­—ç¬¦ä¸²1çš„
+////å’Œå‡å»å­—ç¬¦ä¸²2çš„å’Œæ—¢ä»£è¡¨äº†è¢«æ·»åŠ çš„å­—ç¬¦
 
 char leetcode::findTheDifference2(string s, string t) {
 	int ret1 = 0;
@@ -48,16 +48,16 @@ char leetcode::findTheDifference2(string s, string t) {
 
 #pragma endregion
 
-#pragma region À¨ºÅÆ¥ÅäÎÊÌâ
-//¸ø¶¨Ò»¸öÖ»°üÀ¨ '('£¬')'£¬'{'£¬'}'£¬'['£¬']' µÄ×Ö·û´®£¬ÅĞ¶Ï×Ö·û´®ÊÇ·ñÓĞĞ§   ÓĞĞ§×Ö·û´®ĞèÂú×ã£º×óÀ¨ºÅ±ØĞëÓÃÏàÍ¬ÀàĞÍµÄÓÒÀ¨ºÅ±ÕºÏ¡£×óÀ¨ºÅ±ØĞëÒÔÕıÈ·µÄË³Ğò±ÕºÏ¡£×¢Òâ¿Õ×Ö·û´®¿É±»ÈÏÎªÊÇÓĞĞ§×Ö·û´®
+#pragma region æ‹¬å·åŒ¹é…é—®é¢˜
+//ç»™å®šä¸€ä¸ªåªåŒ…æ‹¬ '('ï¼Œ')'ï¼Œ'{'ï¼Œ'}'ï¼Œ'['ï¼Œ']' çš„å­—ç¬¦ä¸²ï¼Œåˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦æœ‰æ•ˆ   æœ‰æ•ˆå­—ç¬¦ä¸²éœ€æ»¡è¶³ï¼šå·¦æ‹¬å·å¿…é¡»ç”¨ç›¸åŒç±»å‹çš„å³æ‹¬å·é—­åˆã€‚å·¦æ‹¬å·å¿…é¡»ä»¥æ­£ç¡®çš„é¡ºåºé—­åˆã€‚æ³¨æ„ç©ºå­—ç¬¦ä¸²å¯è¢«è®¤ä¸ºæ˜¯æœ‰æ•ˆå­—ç¬¦ä¸²
 bool leetcode::isValid(string s) {
-	if (s.length() % 2 != 0)// ¿ÉÒÔÓÃs.length() & 1 == 1 À´ÅĞ¶Ï³¤¶ÈÊÇ·ñÎªÅ¼Êı£¬Î»ÔËËãÖ´ĞĞĞ§ÂÊ¸ß
+	if (s.length() % 2 != 0)// å¯ä»¥ç”¨s.length() & 1 == 1 æ¥åˆ¤æ–­é•¿åº¦æ˜¯å¦ä¸ºå¶æ•°ï¼Œä½è¿ç®—æ‰§è¡Œæ•ˆç‡é«˜
 		return false;
 	if (s.length() == 0)
 		return true;
 	stack<char> mystack;
 	int i = 0;
-	mystack.push('#');//ÉÚ±øÔªËØ£¬ÔÚÊı¾İ½á¹¹ÖĞÓÃÓÚÅĞ¶Ï±ß½ç£¬¼õÉÙ±éÀúµÄ¿ªÏú
+	mystack.push('#');//å“¨å…µå…ƒç´ ï¼Œåœ¨æ•°æ®ç»“æ„ä¸­ç”¨äºåˆ¤æ–­è¾¹ç•Œï¼Œå‡å°‘éå†çš„å¼€é”€
 	while (i < s.size()) {
 		if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
 			mystack.push(s[i]);
@@ -83,37 +83,37 @@ bool leetcode::isVaild2(string s) {
 		if (s[i] == '(') st.push(')');
 		else if (s[i] == '{') st.push('}');
 		else if (s[i] == '[') st.push(']');
-		// µÚÈıÖÖÇé¿ö ÊÇ±éÀú×Ö·û´®Æ¥ÅäµÄ¹ı³ÌÖĞ£¬Õ»ÒÑ¾­Îª¿ÕÁË£¬Ã»ÓĞÆ¥ÅäµÄ×Ö·ûÁË£¬ËµÃ÷ÓÒÀ¨ºÅÃ»ÓĞÕÒµ½¶ÔÓ¦µÄ×óÀ¨ºÅ return false
-		// µÚ¶şÖÖÇé¿ö ±éÀú×Ö·û´®Æ¥ÅäµÄ¹ı³ÌÖĞ£¬·¢ÏÖÕ»ÀïÃ»ÓĞÎÒÃÇÒªÆ¥ÅäµÄ×Ö·û¡£ËùÒÔreturn false
+		// ç¬¬ä¸‰ç§æƒ…å†µ æ˜¯éå†å­—ç¬¦ä¸²åŒ¹é…çš„è¿‡ç¨‹ä¸­ï¼Œæ ˆå·²ç»ä¸ºç©ºäº†ï¼Œæ²¡æœ‰åŒ¹é…çš„å­—ç¬¦äº†ï¼Œè¯´æ˜å³æ‹¬å·æ²¡æœ‰æ‰¾åˆ°å¯¹åº”çš„å·¦æ‹¬å· return false
+		// ç¬¬äºŒç§æƒ…å†µ éå†å­—ç¬¦ä¸²åŒ¹é…çš„è¿‡ç¨‹ä¸­ï¼Œå‘ç°æ ˆé‡Œæ²¡æœ‰æˆ‘ä»¬è¦åŒ¹é…çš„å­—ç¬¦ã€‚æ‰€ä»¥return false
 		else if (st.empty() || st.top() != s[i]) return false;
 		else st.pop(); // st.top() == s[i]
 	}
-	// µÚÒ»ÖÖÇé¿ö ´ËÊ±ÎÒÃÇÒÑ¾­±éÀúÍêÁË×Ö·û´®£¬µ«ÊÇÕ»²»Îª¿Õ£¬ËµÃ÷ÓĞÏàÓ¦µÄ×óÀ¨ºÅÃ»ÓĞÓÒÀ¨ºÅÀ´Æ¥Åä£¬ËùÒÔreturn false£¬·ñÔò¾Íreturn true
+	// ç¬¬ä¸€ç§æƒ…å†µ æ­¤æ—¶æˆ‘ä»¬å·²ç»éå†å®Œäº†å­—ç¬¦ä¸²ï¼Œä½†æ˜¯æ ˆä¸ä¸ºç©ºï¼Œè¯´æ˜æœ‰ç›¸åº”çš„å·¦æ‹¬å·æ²¡æœ‰å³æ‹¬å·æ¥åŒ¹é…ï¼Œæ‰€ä»¥return falseï¼Œå¦åˆ™å°±return true
 	return st.empty();
 }
 
 #pragma endregion
 
-#pragma region ×Ö½ÚÌø¶¯3.ÎŞÖØ¸´×Ö·ûµÄ×î³¤×Ó´®
+#pragma region å­—èŠ‚è·³åŠ¨3.æ— é‡å¤å­—ç¬¦çš„æœ€é•¿å­ä¸²
 int leetcode::lengthOfLongestSubstring(string s)
 {
-	//¹şÏ£¼¯ºÏ£¬¼ÇÂ¼Ã¿¸ö×Ö·ûÊÇ·ñ³öÏÖ¹ı
+	//å“ˆå¸Œé›†åˆï¼Œè®°å½•æ¯ä¸ªå­—ç¬¦æ˜¯å¦å‡ºç°è¿‡
 	unordered_set<char>occ;
 	int n = s.size();
-	//ÓÒÖ¸Õë£¬³õÊ¼ÖµÎª-1£¬Ïàµ±ÓÚÎÒÃÇ»¹ÔÚ×Ö·û´®µÄ×ó²à±ß½ç£¬»¹Ã»ÓĞ¿ªÊ¼ÒÆ¶¯
+	//å³æŒ‡é’ˆï¼Œåˆå§‹å€¼ä¸º-1ï¼Œç›¸å½“äºæˆ‘ä»¬è¿˜åœ¨å­—ç¬¦ä¸²çš„å·¦ä¾§è¾¹ç•Œï¼Œè¿˜æ²¡æœ‰å¼€å§‹ç§»åŠ¨
 	int rk = -1, ans = 0;
-	//Ã¶¾Ù×óÖ¸ÕëµÄÎ»ÖÃ£¬³õÊ¼ÖµÒşĞÔ±íÏÖÎª-1
+	//æšä¸¾å·¦æŒ‡é’ˆçš„ä½ç½®ï¼Œåˆå§‹å€¼éšæ€§è¡¨ç°ä¸º-1
 	for (int i = 0; i < n; ++i) {
 		if (i!= 0) {
-			//×óÖ¸ÕëÏòÓÒÒÆ¶¯Ò»¸ñ£¬ÒÆ³ıÒ»¸ö×Ö·û
+			//å·¦æŒ‡é’ˆå‘å³ç§»åŠ¨ä¸€æ ¼ï¼Œç§»é™¤ä¸€ä¸ªå­—ç¬¦
 			occ.erase(s[i - 1]);
 		}
 		while (rk + 1 < n && !occ.count(s[rk + 1])){
-			//²»¶ÏÒÆ¶¯ÓÒÖ¸Õë
+			//ä¸æ–­ç§»åŠ¨å³æŒ‡é’ˆ
 			occ.insert(s[rk + 1]);
 			++rk;
 		}
-		//µÚiµ½µÚrk¸ö×Ö·ûÊÇÒ»¸ö¼«³¤µÄÎŞÖØ¸´×Ö·û×Ó´®
+		//ç¬¬iåˆ°ç¬¬rkä¸ªå­—ç¬¦æ˜¯ä¸€ä¸ªæé•¿çš„æ— é‡å¤å­—ç¬¦å­ä¸²
 		ans = max(ans, rk - i + 1);
 	}
 	return ans;
@@ -130,14 +130,14 @@ int leetcode::lengthOfLongestSubstring_byMap(string s)
 	unordered_map<char, int>map;
 	while (end < len) {
 		ans = max(ans, end - start);
-		// µ±Óöµ½ÖØ¸´Öµ£¬ËµÃ÷×óÖ¸ÕëĞèÒªÌø×ª£¬Ìø×ªµÄÎ»ÖÃÊÇ¸ÃÖØ¸´ÖµµÄÏÂ±ê+1
-		// ±ÈÈç×Ö·û´®abcdecf£¬µ½Óöµ½µÚ¶ş¸öc£¬¼´±ã´ÓbcdeÈÎÒâÒ»¸ö¿ªÊ¼£¬³¤¶È¶¼ÎŞ·¨³¬¹ıa£¬Ö»ÓĞ´Ódecf¿ªÊ¼¼ÆËã²ÅÊÇĞÂÒ»ÂÖ²éÕÒ
-		// ÖµµÃ×¢ÒâµÄÊÇ£¬Èç¹ûÅöµ½ÁËÖØ¸´ÖµµÄÏÂ±ê±È×óÖ¸Õë»¹Ğ¡µÄÇé¿ö£¬²»Ó¦¸ÃÌø×ª£¬ÒòÎª×óÖ¸Õë×ó±ßµÄÔªËØ²»ÔÙ´°¿ÚÄÚ£¬±ÈÈçabba
+		// å½“é‡åˆ°é‡å¤å€¼ï¼Œè¯´æ˜å·¦æŒ‡é’ˆéœ€è¦è·³è½¬ï¼Œè·³è½¬çš„ä½ç½®æ˜¯è¯¥é‡å¤å€¼çš„ä¸‹æ ‡+1
+		// æ¯”å¦‚å­—ç¬¦ä¸²abcdecfï¼Œåˆ°é‡åˆ°ç¬¬äºŒä¸ªcï¼Œå³ä¾¿ä»bcdeä»»æ„ä¸€ä¸ªå¼€å§‹ï¼Œé•¿åº¦éƒ½æ— æ³•è¶…è¿‡aï¼Œåªæœ‰ä»decfå¼€å§‹è®¡ç®—æ‰æ˜¯æ–°ä¸€è½®æŸ¥æ‰¾
+		// å€¼å¾—æ³¨æ„çš„æ˜¯ï¼Œå¦‚æœç¢°åˆ°äº†é‡å¤å€¼çš„ä¸‹æ ‡æ¯”å·¦æŒ‡é’ˆè¿˜å°çš„æƒ…å†µï¼Œä¸åº”è¯¥è·³è½¬ï¼Œå› ä¸ºå·¦æŒ‡é’ˆå·¦è¾¹çš„å…ƒç´ ä¸å†çª—å£å†…ï¼Œæ¯”å¦‚abba
 		if (map.count(s[end]) && map.find(s[end])->second >= start) {
 			start = map.find(s[end])->second + 1;
-			map[s[end]] = end;//c++ Ö»ÄÜÕâÑù¸üĞÂvalUeµÄÖµ
+			map[s[end]] = end;//c++ åªèƒ½è¿™æ ·æ›´æ–°valUeçš„å€¼
 		}
-		map.insert(pair<char, int>(s[end], end));// ÎŞÂÛÖØ²»ÖØ¸´¶¼ĞèÒª¸üĞÂ£¬¸ÃÔªËØ×î½üµÄÏÂ±ê
+		map.insert(pair<char, int>(s[end], end));// æ— è®ºé‡ä¸é‡å¤éƒ½éœ€è¦æ›´æ–°ï¼Œè¯¥å…ƒç´ æœ€è¿‘çš„ä¸‹æ ‡
 		end++;
 	}
 	return ans = max(ans, end - start);
@@ -161,11 +161,11 @@ int leetcode::lengthOfLongerstSubstring2(string s)
 }
 #pragma endregion
 
-#pragma region 76.×îĞ¡¸²¸Ç×Ó´®
+#pragma region 76.æœ€å°è¦†ç›–å­ä¸²
 string leetcode::minWindow(string s, string t)
 {
 	if (s.size() == 0 || t.size() == 0)
-		return "ÇëÊäÈë×Ö·û";
+		return "è¯·è¾“å…¥å­—ç¬¦";
 	unordered_map<char, int>lookUp, minSubstring;
 
 	return string();
@@ -175,7 +175,7 @@ string leetcode::minWindow(string s, string t)
 
 
 
-#pragma region ì³²¨ÄÇÆõÊıÁĞ
+#pragma region æ–æ³¢é‚£å¥‘æ•°åˆ—
 int leetcode::fib_recursion(int n)
 {
 	if (n < 2) return n;
@@ -203,10 +203,10 @@ int leetcode::fib_tongxiang(int n)
 }
 #pragma endregion
 
-//¾çÇé´¥·¢
+//å‰§æƒ…è§¦å‘
 vector<int> leetcode::getTriggerTime(vector<vector<int> >& increase, vector<vector<int> >& requirements)
 {
-	vector<vector<int> > s(increase.size() + 1, vector<int>(3, 0));//vector<vector<int> > ×îºÃ¿ÕÒ»¸ñ£¬·ñÔòÓĞµÄ±àÒëÆ÷»á±¨´í
+	vector<vector<int> > s(increase.size() + 1, vector<int>(3, 0));//vector<vector<int> > æœ€å¥½ç©ºä¸€æ ¼ï¼Œå¦åˆ™æœ‰çš„ç¼–è¯‘å™¨ä¼šæŠ¥é”™
 	for (int i = 0; i < increase.size(); i++) {
 		for (int j = 0; j < 3; j++) {
 			s[i + 1][j] = s[i][j] + increase[i][j];
@@ -214,7 +214,7 @@ vector<int> leetcode::getTriggerTime(vector<vector<int> >& increase, vector<vect
 	}
 	vector<int> ans;
 	for (auto v : requirements) {
-		int l = 0, r = increase.size();  // ¶ş·Ö²éÕÒ
+		int l = 0, r = increase.size();  // äºŒåˆ†æŸ¥æ‰¾
 		while (l < r) {
 			int m = (l + r) / 2;
 			if (s[m][0] >= v[0] && s[m][1] >= v[1] && s[m][2] >= v[2])
@@ -232,24 +232,24 @@ vector<int> leetcode::getTriggerTime(vector<vector<int> >& increase, vector<vect
 
 
 
-//ËÑË÷²åÈëÎ»ÖÃ
+//æœç´¢æ’å…¥ä½ç½®
 int leetcode::searchInsert(vector<int>& nums, int target)
 {
 	if (nums.empty()) return NULL;
-	int l = 0, r = nums.size() - 1;//×óÓÒÖ¸Õë
+	int l = 0, r = nums.size() - 1;//å·¦å³æŒ‡é’ˆ
 	while (l<r)
 	{
-		int mid = l+((r-l)>>1);//×îÓÅÖĞµãÈ¡·¨
+		int mid = l+((r-l)>>1);//æœ€ä¼˜ä¸­ç‚¹å–æ³•
 		if (nums[mid] >= target)
 			r = mid;
 		else
 			l = mid + 1;
 	}
 	if (nums[l] < target) return l + 1;
-	else return l;//Ñ­»·½áÊøÊ± l = r,ËùÒÔ·µ»ØÄÄ¸ö¶¼Ò»Ñù
+	else return l;//å¾ªç¯ç»“æŸæ—¶ l = r,æ‰€ä»¥è¿”å›å“ªä¸ªéƒ½ä¸€æ ·
 }
 
-//81. ËÑË÷Ğı×ªÅÅĞòÊı×é II
+//81. æœç´¢æ—‹è½¬æ’åºæ•°ç»„ II
 bool leetcode::search(vector<int>& nums, int target)
 {
 	if (nums.empty()) return false;
@@ -283,7 +283,7 @@ bool leetcode::search(vector<int>& nums, int target)
 	return false;
 }
 
-//74.ËÑË÷¶şÎ¬¾ØÕó
+//74.æœç´¢äºŒç»´çŸ©é˜µ
 bool leetcode::searchMatrix(vector<vector<int>>& matrix, int target)
 {
 	if(matrix.empty() || target < -10000 || target > 10000)
@@ -305,7 +305,7 @@ bool leetcode::searchMatrix(vector<vector<int>>& matrix, int target)
 	return false;
 }
 
-//Î÷·¨µÄË¢ÌâÃØ¼®½â·¨
+//è¥¿æ³•çš„åˆ·é¢˜ç§˜ç±è§£æ³•
 bool leetcode::searchMatrix2(vector<vector<int>>& matrix, int target)
 {
 	if (matrix.empty() || target < -10000 || target > 10000)
@@ -325,7 +325,7 @@ bool leetcode::searchMatrix2(vector<vector<int>>& matrix, int target)
 	return false;
 }
 
-//240.ËÑË÷¶şÎ¬¾ØÕóII
+//240.æœç´¢äºŒç»´çŸ©é˜µII
 bool leetcode::searchMatrixEnhance(vector<vector<int>>& matrix, int target)
 {
 	int m = matrix.size(), n = matrix[0].size();
@@ -343,7 +343,7 @@ bool leetcode::searchMatrixEnhance(vector<vector<int>>& matrix, int target)
 	return false;
 }
 
-//	53. Ñ°ÕÒĞı×ªÅÅĞòÊı×éÖĞµÄ×îĞ¡Öµ
+//	53. å¯»æ‰¾æ—‹è½¬æ’åºæ•°ç»„ä¸­çš„æœ€å°å€¼
 #pragma region
 int leetcode::findMin(vector<int>& nums)
 {
@@ -388,7 +388,7 @@ int leetcode::finMax(vector<int>& nums)
 {
 	int l = 0, r = nums.size() - 1;
 	while (l < r) {
-		int mid = l + ((r+1 - l) >> 1); /* ÏÈ¼ÓÒ»ÔÙ³ı£¬mid¸ü¿¿½üÓÒ±ßµÄright */
+		int mid = l + ((r+1 - l) >> 1); /* å…ˆåŠ ä¸€å†é™¤ï¼Œmidæ›´é è¿‘å³è¾¹çš„right */
 		if (nums[mid] > nums[l]) {
 			l = mid;
 		}
@@ -397,44 +397,44 @@ int leetcode::finMax(vector<int>& nums)
 				r = mid - 1;
 			}
 	}
-	return nums[(r + 1) % nums.size()];/* ×î´óÖµÏòÓÒÒÆ¶¯Ò»Î»¾ÍÊÇ×îĞ¡ÖµÁË£¨ĞèÒª¿¼ÂÇ×î´óÖµÔÚ×îÓÒ±ßµÄÇé¿ö£¬ÓÒÒÆÒ»Î»ºó¶ÔÊı×é³¤¶ÈÈ¡Óà£© */
+	return nums[(r + 1) % nums.size()];/* æœ€å¤§å€¼å‘å³ç§»åŠ¨ä¸€ä½å°±æ˜¯æœ€å°å€¼äº†ï¼ˆéœ€è¦è€ƒè™‘æœ€å¤§å€¼åœ¨æœ€å³è¾¹çš„æƒ…å†µï¼Œå³ç§»ä¸€ä½åå¯¹æ•°ç»„é•¿åº¦å–ä½™ï¼‰ */
 }
 
 int leetcode::finMin4(vector<int>& nums)
 {
 	int l = 0, r = nums.size() - 1;
-	while (l <= r) { // Ñ­»·µÄÌõ¼şÑ¡Îª×ó±ÕÓÒ±ÕÇø¼äleft <= right
+	while (l <= r) { // å¾ªç¯çš„æ¡ä»¶é€‰ä¸ºå·¦é—­å³é—­åŒºé—´left <= right
 		int mid = l + ((r - l) >> 1);
-		if (nums[mid] >= nums[r]) {// ×¢ÒâÊÇµ±ÖĞÖµ´óÓÚµÈÓÚÓÒÖµÊ±£¬
-			l = mid + 1; // ½«×ó±ß½çÒÆ¶¯µ½ÖĞÖµµÄÓÒ±ß
+		if (nums[mid] >= nums[r]) {// æ³¨æ„æ˜¯å½“ä¸­å€¼å¤§äºç­‰äºå³å€¼æ—¶ï¼Œ
+			l = mid + 1; // å°†å·¦è¾¹ç•Œç§»åŠ¨åˆ°ä¸­å€¼çš„å³è¾¹
 		}
-		else { // µ±ÖĞÖµĞ¡ÓÚÓÒÖµÊ±
-			r = mid;      // ½«ÓÒ±ß½çÒÆ¶¯µ½ÖĞÖµ´¦
+		else { // å½“ä¸­å€¼å°äºå³å€¼æ—¶
+			r = mid;      // å°†å³è¾¹ç•Œç§»åŠ¨åˆ°ä¸­å€¼å¤„
 		}
 	}
 
-	return nums[r];      // ×îĞ¡Öµ·µ»Ønums[right]
+	return nums[r];      // æœ€å°å€¼è¿”å›nums[right]
 }
 
 
 
 int leetcode::findMin3(vector<int>& nums) {
 	int left = 0;
-	int right = nums.size() - 1;                /* ×ó±ÕÓÒ±ÕÇø¼ä£¬Èç¹ûÓÃÓÒ¿ªÇø¼äÔò²»·½±ãÅĞ¶ÏÓÒÖµ */
-	while (left < right) {                      /* Ñ­»·²»±äÊ½£¬Èç¹ûleft == right£¬ÔòÑ­»·½áÊø */
-		int mid = left + (right - left) / 2;    /* µØ°å³ı£¬mid¸ü¿¿½üleft */
-		if (nums[mid] > nums[right]) {          /* ÖĞÖµ > ÓÒÖµ£¬×îĞ¡ÖµÔÚÓÒ°ë±ß£¬ÊÕËõ×ó±ß½ç */
-			left = mid + 1;                     /* ÒòÎªÖĞÖµ > ÓÒÖµ£¬ÖĞÖµ¿Ï¶¨²»ÊÇ×îĞ¡Öµ£¬×ó±ß½ç¿ÉÒÔ¿ç¹ımid */
+	int right = nums.size() - 1;                /* å·¦é—­å³é—­åŒºé—´ï¼Œå¦‚æœç”¨å³å¼€åŒºé—´åˆ™ä¸æ–¹ä¾¿åˆ¤æ–­å³å€¼ */
+	while (left < right) {                      /* å¾ªç¯ä¸å˜å¼ï¼Œå¦‚æœleft == rightï¼Œåˆ™å¾ªç¯ç»“æŸ */
+		int mid = left + (right - left) / 2;    /* åœ°æ¿é™¤ï¼Œmidæ›´é è¿‘left */
+		if (nums[mid] > nums[right]) {          /* ä¸­å€¼ > å³å€¼ï¼Œæœ€å°å€¼åœ¨å³åŠè¾¹ï¼Œæ”¶ç¼©å·¦è¾¹ç•Œ */
+			left = mid + 1;                     /* å› ä¸ºä¸­å€¼ > å³å€¼ï¼Œä¸­å€¼è‚¯å®šä¸æ˜¯æœ€å°å€¼ï¼Œå·¦è¾¹ç•Œå¯ä»¥è·¨è¿‡mid */
 		}
-		else if (nums[mid] < nums[right]) {   /* Ã÷È·ÖĞÖµ < ÓÒÖµ£¬×îĞ¡ÖµÔÚ×ó°ë±ß£¬ÊÕËõÓÒ±ß½ç */
-			right = mid;                        /* ÒòÎªÖĞÖµ < ÓÒÖµ£¬ÖĞÖµÒ²¿ÉÄÜÊÇ×îĞ¡Öµ£¬ÓÒ±ß½çÖ»ÄÜÈ¡µ½mid´¦ */
+		else if (nums[mid] < nums[right]) {   /* æ˜ç¡®ä¸­å€¼ < å³å€¼ï¼Œæœ€å°å€¼åœ¨å·¦åŠè¾¹ï¼Œæ”¶ç¼©å³è¾¹ç•Œ */
+			right = mid;                        /* å› ä¸ºä¸­å€¼ < å³å€¼ï¼Œä¸­å€¼ä¹Ÿå¯èƒ½æ˜¯æœ€å°å€¼ï¼Œå³è¾¹ç•Œåªèƒ½å–åˆ°midå¤„ */
 		}
 	}
-	return nums[left];    /* Ñ­»·½áÊø£¬left == right£¬×îĞ¡ÖµÊä³önums[left]»ònums[right]¾ù¿É */
+	return nums[left];    /* å¾ªç¯ç»“æŸï¼Œleft == rightï¼Œæœ€å°å€¼è¾“å‡ºnums[left]æˆ–nums[right]å‡å¯ */
 }
 #pragma endregion
 
-//1018.¿É±»5Õû³ıµÄ¶ş½øÖÆÊı
+//1018.å¯è¢«5æ•´é™¤çš„äºŒè¿›åˆ¶æ•°
 vector<bool> leetcode::prefixesDivBy5(vector<int>& A)
 {
 	vector<bool> ans;
@@ -447,14 +447,14 @@ vector<bool> leetcode::prefixesDivBy5(vector<int>& A)
 	return ans;
 }
 
-#pragma region Î»ÔËËãÊµÏÖ¼Ó¼õ³Ë³ı
+#pragma region ä½è¿ç®—å®ç°åŠ å‡ä¹˜é™¤
 int leetcode::add(int a, int b)
 {
-	if (b == 0) //µİ¹é½áÊøÌõ¼ş£ºÈç¹ûÓÒ¼ÓÊıÎª0£¬¼´²»ÔÙÓĞ½øÎ»ÁË£¬Ôò½áÊø¡£
+	if (b == 0) //é€’å½’ç»“æŸæ¡ä»¶ï¼šå¦‚æœå³åŠ æ•°ä¸º0ï¼Œå³ä¸å†æœ‰è¿›ä½äº†ï¼Œåˆ™ç»“æŸã€‚
 		return a;
 	int s = a^b;
-	int c = (a&b) << 1; //½øÎ»×óÒÆ1Î»£¬´ïµ½½øÎ»µÄÄ¿µÄ¡£
-	return add(s, c); //ÔÙ°Ñ'ºÍ'ºÍ'½øÎ»'Ïà¼Ó¡£µİ¹éÊµÏÖ¡£
+	int c = (a&b) << 1; //è¿›ä½å·¦ç§»1ä½ï¼Œè¾¾åˆ°è¿›ä½çš„ç›®çš„ã€‚
+	return add(s, c); //å†æŠŠ'å’Œ'å’Œ'è¿›ä½'ç›¸åŠ ã€‚é€’å½’å®ç°ã€‚
 }
 int leetcode::subTraction(int a, int b)
 {
@@ -462,14 +462,14 @@ int leetcode::subTraction(int a, int b)
 }
 
 
-//ºÜÖ±¹Û£¬¾ÍÊÇÓÃÑ­»·¼Ó·¨Ìæ´ú³Ë·¨¡£a*b£¬¾ÍÊÇ°ÑaÀÛ¼Ób´Î¡£Ê±¼ä¸´ÔÓ¶ÈÎªO(N)¡£
+//å¾ˆç›´è§‚ï¼Œå°±æ˜¯ç”¨å¾ªç¯åŠ æ³•æ›¿ä»£ä¹˜æ³•ã€‚a*bï¼Œå°±æ˜¯æŠŠaç´¯åŠ bæ¬¡ã€‚æ—¶é—´å¤æ‚åº¦ä¸ºO(N)ã€‚
 int leetcode::multiply(int a, int b)
 {
 	bool flag = true;
-	if (getSign(a) == getSign(b)) {//»ıµÄ·ûºÅÅĞ¶¨
+	if (getSign(a) == getSign(b)) {//ç§¯çš„ç¬¦å·åˆ¤å®š
 		flag = false;
 	}
-	a = bePositive(a);//ÏÈ°Ñ³ËÊıºÍ±»³ËÊı±äÎªÕıÊı
+	a = bePositive(a);//å…ˆæŠŠä¹˜æ•°å’Œè¢«ä¹˜æ•°å˜ä¸ºæ­£æ•°
 	b = bePositive(b);
 	int ans = 0;
 	while (b) {
@@ -505,7 +505,7 @@ bool leetcode::possible(vector<int>& piles, int H, int K)
 {
 	int sum = 0;
 	for (int &i : piles) {
-		double d = (double)i /(double) K; //ÕûÊıÏà³ıÏòÉÏÈ¡ÕûÒ²¿ÉÒÔĞ´³É£¨i -1)/K + 1;
+		double d = (double)i /(double) K; //æ•´æ•°ç›¸é™¤å‘ä¸Šå–æ•´ä¹Ÿå¯ä»¥å†™æˆï¼ˆi -1)/K + 1;
 		sum += ceil(d);
 	}
 	
@@ -515,15 +515,15 @@ bool leetcode::possible(vector<int>& piles, int H, int K)
 int leetcode::minEatingSpeed(vector<int>& piles, int H)
 {
 	int l = 1;
-	auto r = max_element(piles.begin(), piles.end());//´ËÊ±rÕâ¸öÖ¸ÕëÊÇÖ¸ÏòÈİÆ÷ÖĞµÄ×î´óÔªËØ
+	auto r = max_element(piles.begin(), piles.end());//æ­¤æ—¶rè¿™ä¸ªæŒ‡é’ˆæ˜¯æŒ‡å‘å®¹å™¨ä¸­çš„æœ€å¤§å…ƒç´ 
 	int rr = (int)*r;
-	while (l < rr) {//·µ»ØµÄÊÇµü´úÆ÷ÔªËØ£¬ÒªÓÃ*È¡³öÆäÖĞ´æµÄÖµ
+	while (l < rr) {//è¿”å›çš„æ˜¯è¿­ä»£å™¨å…ƒç´ ï¼Œè¦ç”¨*å–å‡ºå…¶ä¸­å­˜çš„å€¼
 		int mid = l + ((rr - l) >> 1);
 		if (!possible(piles, H, mid)) {
 			l = mid + 1;
 		}
 		else
-			rr = mid;//Èç¹ûĞ´³É*r = mid,ÈİÆ÷ÖĞµÄ×î´óÖµÒ²»á±»ĞŞ¸Ä
+			rr = mid;//å¦‚æœå†™æˆ*r = mid,å®¹å™¨ä¸­çš„æœ€å¤§å€¼ä¹Ÿä¼šè¢«ä¿®æ”¹
 	}
 	return l;
 }
@@ -538,6 +538,7 @@ bool leetcode::possible2(vector<int>& weights, int D, int C) {
 	}
 	return (sumD + 1) <= D;
 }
+
 int leetcode::shipWithinDays(vector<int>& weights, int D)
 {
 	int l = (int)*max_element(weights.begin(),weights.end());
@@ -558,4 +559,193 @@ int leetcode::shipWithinDays(vector<int>& weights, int D)
 	return l;
 }
 
+
+
+//27.ç§»é™¤å…ƒç´ 
+int leetcode::removeElement(vector<int>& nums, int val) //æš´åŠ›è§£æ³•ï¼ŒåŒå±‚å¾ªç¯ï¼Œå‘ç°ç›®æ ‡ åé¢çš„å…ƒç´ å¾€å‰è¿›ä¸€ä½è¦†ç›–
+{
+	int size = nums.size();
+	for (int i = 0; i < size; i++) {
+		if (nums[i] == val) {//å‘ç°éœ€è¦ç§»é™¤çš„å…ƒç´ ï¼Œå°±å°†æ•°ç»„é›†ä½“å¾€å‰ç§»åŠ¨ä¸€ä½
+			for (int j = i + 1; j < size; j++) {
+				nums[j - 1] = nums[j];
+			}
+			i--;//å› ä¸ºä¸‹æ ‡iä»¥åçš„æ•°å€¼éƒ½å‘å‰ç§»åŠ¨äº†ä¸€ä½ï¼Œæ‰€ä»¥iä¹Ÿå‘å‰ç§»åŠ¨ä¸€ä½ï¼Œä¹‹å‰çš„ä¸‹ä¸€ä¸ªå…ƒç´ å·²ç»ç§»åˆ°iå½“å‰çš„ä½ç½®ï¼Œå¦‚æœä¸i-1ï¼Œå°±ä¼šè·³è¿‡æ£€æŸ¥è¿™ä¸ªç§»è¿‡æ¥çš„å…ƒç´ 
+			size--;//æ­¤æ—¶æ•°å€¼æ‰“å¤§å°-1
+		}
+	}
+	return size;
+}
+
+int leetcode::removeElementSzz(vector<int>& nums, int val)
+{
+	int slowIndex = 0;
+	for (int fastIndex = 0; fastIndex < nums.size(); ++fastIndex) {
+		if (val != nums[fastIndex]) {
+			nums[slowIndex++] = nums[fastIndex];
+		}
+	}
+	return slowIndex;
+}
+//è§£æ³•1ï¼šæ’åº
+/*é¦–å…ˆå°†æ•°ç»„æ’åºã€‚
+
+å¦‚æœæ•°ç»„ä¸­å…¨æ˜¯éè´Ÿæ•°ï¼Œåˆ™æ’åºåæœ€å¤§çš„ä¸‰ä¸ªæ•°ç›¸ä¹˜å³ä¸ºæœ€å¤§ä¹˜ç§¯ï¼›å¦‚æœå…¨æ˜¯éæ­£æ•°ï¼Œåˆ™æœ€å¤§çš„ä¸‰ä¸ªæ•°ç›¸ä¹˜åŒæ ·ä¹Ÿä¸ºæœ€å¤§ä¹˜ç§¯ã€‚
+
+å¦‚æœæ•°ç»„ä¸­æœ‰æ­£æ•°æœ‰è´Ÿæ•°ï¼Œåˆ™æœ€å¤§ä¹˜ç§¯æ—¢å¯èƒ½æ˜¯ä¸‰ä¸ªæœ€å¤§æ­£æ•°çš„ä¹˜ç§¯ï¼Œä¹Ÿå¯èƒ½æ˜¯ä¸¤ä¸ªæœ€å°è´Ÿæ•°ï¼ˆå³ç»å¯¹å€¼æœ€å¤§ï¼‰ä¸æœ€å¤§æ­£æ•°çš„ä¹˜ç§¯ã€‚
+
+ç»¼ä¸Šï¼Œæˆ‘ä»¬åœ¨ç»™æ•°ç»„æ’åºåï¼Œåˆ†åˆ«æ±‚å‡ºä¸‰ä¸ªæœ€å¤§æ­£æ•°çš„ä¹˜ç§¯ï¼Œä»¥åŠä¸¤ä¸ªæœ€å°è´Ÿæ•°ä¸æœ€å¤§æ­£æ•°çš„ä¹˜ç§¯ï¼ŒäºŒè€…ä¹‹é—´çš„æœ€å¤§å€¼å³ä¸ºæ‰€æ±‚ç­”æ¡ˆã€‚
+
+ä½œè€…ï¼šLeetCode-Solution
+é“¾æ¥ï¼šhttps://leetcode-cn.com/problems/maximum-product-of-three-numbers/solution/san-ge-shu-de-zui-da-cheng-ji-by-leetcod-t9sb/
+æ¥æºï¼šåŠ›æ‰£ï¼ˆLeetCodeï¼‰
+è‘—ä½œæƒå½’ä½œè€…æ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»ä½œè€…è·å¾—æˆæƒï¼Œéå•†ä¸šè½¬è½½è¯·æ³¨æ˜å‡ºå¤„ã€‚
+*/
+int leetcode::maximumProduct(vector<int>& nums)
+{
+	sort(nums.begin(), nums.end());
+	int n = nums.size();
+	return max(nums[0] * nums[1] * nums[n - 1], nums[n - 3] * nums[n - 2] * nums[n - 1]);
+}
+
+int leetcode::maximumProduct2(vector<int>& nums)
+{
+	// æœ€å°çš„å’Œç¬¬äºŒå°çš„
+	int min1 = INT_MAX, min2 = INT_MAX;
+	// æœ€å¤§çš„ã€ç¬¬äºŒå¤§çš„å’Œç¬¬ä¸‰å¤§çš„
+	int max1 = INT_MIN, max2 = INT_MIN, max3 = INT_MIN;
+
+	for (int x : nums) {
+		if (x < min1) {
+			min2 = min1;
+			min1 = x;
+		}
+		else if (x < min2) {
+			min2 = x;
+		}
+
+		if (x > max1) {
+			max3 = max2;
+			max2 = max1;
+			max1 = x;
+		}
+		else if (x > max2) {
+			max3 = max2;
+			max2 = x;
+		}
+		else if (x > max3) {
+			max3 = x;
+		}
+	}
+
+	return max(min1 * min2 * max1, max1 * max2 * max3);
+}
+
+
+
+
+/*æ–¹æ³•ä¸€ï¼šå¿«é€Ÿå¹‚ + é€’å½’
+* å¿«é€Ÿå¹‚ç®—æ³•ã€çš„æœ¬è´¨æ˜¯åˆ†æ²»ç®—æ³•ã€‚ä¸¾ä¸ªä¾‹å­ï¼Œå¦‚æœæˆ‘ä»¬è¦è®¡ç®— x^{64}x 
+64ï¼Œæˆ‘ä»¬å¯ä»¥æŒ‰ç…§ï¼šx \to x^2 \to x^4 \to x^8 \to x^{16} \to x^{32} \to x^{64}
+xâ†’x 2
+ â†’x 
+4
+ â†’x 
+8
+ â†’x 
+16
+ â†’x 
+32
+ â†’x 
+64
+ 
+
+çš„é¡ºåºï¼Œä» xx å¼€å§‹ï¼Œæ¯æ¬¡ç›´æ¥æŠŠä¸Šä¸€æ¬¡çš„ç»“æœè¿›è¡Œå¹³æ–¹ï¼Œè®¡ç®— 66 æ¬¡å°±å¯ä»¥å¾—åˆ° x^{64}x 
+64
+  çš„å€¼ï¼Œè€Œä¸éœ€è¦å¯¹ xx ä¹˜ 6363 æ¬¡ xxã€‚
+
+å†ä¸¾ä¸€ä¸ªä¾‹å­ï¼Œå¦‚æœæˆ‘ä»¬è¦è®¡ç®— x^{77}x 
+77
+ ï¼Œæˆ‘ä»¬å¯ä»¥æŒ‰ç…§ï¼š
+
+x \to x^2 \to x^4 \to x^9 \to x^{19} \to x^{38} \to x^{77}
+xâ†’x 
+2
+ â†’x 
+4
+ â†’x 
+9
+ â†’x 
+19
+ â†’x 
+38
+ â†’x 
+77
+ 
+
+çš„é¡ºåºï¼Œåœ¨ x \to x^2xâ†’x 
+2
+ ï¼Œx^2 \to x^4x 
+2
+ â†’x 
+4
+ ï¼Œx^{19} \to x^{38}x 
+19
+ â†’x 
+38
+  è¿™äº›æ­¥éª¤ä¸­ï¼Œæˆ‘ä»¬ç›´æ¥æŠŠä¸Šä¸€æ¬¡çš„ç»“æœè¿›è¡Œå¹³æ–¹ï¼Œè€Œåœ¨ x^4 \to x^9x 
+4
+ â†’x 
+9
+ ï¼Œx^9 \to x^{19}x 
+9
+ â†’x 
+19
+ ï¼Œx^{38} \to x^{77}x 
+38
+ â†’x 
+77
+  è¿™äº›æ­¥éª¤ä¸­ï¼Œæˆ‘ä»¬æŠŠä¸Šä¸€æ¬¡çš„ç»“æœè¿›è¡Œå¹³æ–¹åï¼Œè¿˜è¦é¢å¤–ä¹˜ä¸€ä¸ª xxã€‚
+
+ç›´æ¥ä»å·¦åˆ°å³è¿›è¡Œæ¨å¯¼çœ‹ä¸Šå»å¾ˆå›°éš¾ï¼Œå› ä¸ºåœ¨æ¯ä¸€æ­¥ä¸­ï¼Œæˆ‘ä»¬ä¸çŸ¥é“åœ¨å°†ä¸Šä¸€æ¬¡çš„ç»“æœå¹³æ–¹ä¹‹åï¼Œè¿˜éœ€ä¸éœ€è¦é¢å¤–ä¹˜ xxã€‚ä½†å¦‚æœæˆ‘ä»¬ä»å³å¾€å·¦çœ‹ï¼Œåˆ†æ²»çš„æ€æƒ³å°±ååˆ†æ˜æ˜¾äº†ï¼š
+
+å½“æˆ‘ä»¬è¦è®¡ç®— x^nx 
+n
+  æ—¶ï¼Œæˆ‘ä»¬å¯ä»¥å…ˆé€’å½’åœ°è®¡ç®—å‡º y = x^{\lfloor n/2 \rfloor}y=x 
+âŒŠn/2âŒ‹
+ ï¼Œå…¶ä¸­ \lfloor a \rfloorâŒŠaâŒ‹ è¡¨ç¤ºå¯¹ aa è¿›è¡Œä¸‹å–æ•´ï¼›
+
+æ ¹æ®é€’å½’è®¡ç®—çš„ç»“æœï¼Œå¦‚æœ nn ä¸ºå¶æ•°ï¼Œé‚£ä¹ˆ x^n = y^2x 
+n
+ =y 
+2
+ ï¼›å¦‚æœ nn ä¸ºå¥‡æ•°ï¼Œé‚£ä¹ˆ x^n = y^2 * xx 
+n
+ =y 
+2
+ âˆ—xï¼›
+
+é€’å½’çš„è¾¹ç•Œä¸º n = 0n=0ï¼Œä»»æ„æ•°çš„ 00 æ¬¡æ–¹å‡ä¸º 11ã€‚
+
+ç”±äºæ¯æ¬¡é€’å½’éƒ½ä¼šä½¿å¾—æŒ‡æ•°å‡å°‘ä¸€åŠï¼Œå› æ­¤é€’å½’çš„å±‚æ•°ä¸º O(\log n)O(logn)ï¼Œç®—æ³•å¯ä»¥åœ¨å¾ˆå¿«çš„æ—¶é—´å†…å¾—åˆ°ç»“æœã€‚
+
+ä½œè€…ï¼šLeetCode-Solution
+é“¾æ¥ï¼šhttps://leetcode-cn.com/problems/powx-n/solution/powx-n-by-leetcode-solution/
+æ¥æºï¼šåŠ›æ‰£ï¼ˆLeetCodeï¼‰
+è‘—ä½œæƒå½’ä½œè€…æ‰€æœ‰ã€‚å•†ä¸šè½¬è½½è¯·è”ç³»ä½œè€…è·å¾—æˆæƒï¼Œéå•†ä¸šè½¬è½½è¯·æ³¨æ˜å‡ºå¤„ã€‚
+*/
+double leetcode::myPow(double x, int n)
+{
+	long long N = n;
+	return N >= 0?quickMul(x,N):1.0/quickMul(x,-N);
+}
+
+double leetcode::quickMul(double x, long long N)
+{
+	if (N == 0) {
+		return 1.0;
+	}
+	double ans = quickMul(x, N / 2);
+	return N %2==0?ans*ans:ans*ans*x;
+}
 

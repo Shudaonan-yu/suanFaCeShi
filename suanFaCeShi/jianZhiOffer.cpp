@@ -84,7 +84,143 @@ jianZhiOffer::ListNode * jianZhiOffer::addTwoNumbers(ListNode * l1, ListNode * l
 	
 	return head->next;
 }
+bool jianZhiOffer::findNumberIn2DArray(vector<vector<int>>& matrix, int target)
+{
+	if (matrix.empty()) return false;
+	int m = matrix[0].size();
+	int line = matrix.size() - 1, row = 0;
+	while (line >= 0 && row < m) {//注意是大于等于0
+		if (matrix[line][row] == target) {
+			return true;
+		}
+		else if (matrix[line][row] > target)
+			line -= 1;
+		else
+			row += 1;
+	}
+	return false;
+}
+string jianZhiOffer::replaceSpace(string s)
+{
+	if (s.length() < 0 || s.length() > 10000) return "@@";
+	string arry;
+	for (char& c : s) {
+		if (c == ' ') {
+			arry.push_back('%');
+			arry.push_back('2');
+			arry.push_back('0');
+		}
+		else
+			arry.push_back(c);
+	}
+	return arry;
+}
+string jianZhiOffer::replaceSpace2(string s)
+{
+	int count = 0; // 统计空格的个数
+	int sOldSize = s.size();
+	for (int i = 0; i < sOldSize; i++) {
+		if (s[i] == ' ') {
+			count++;
+		}
+	}
+	//扩充字符串s的大小，也就是每个空格替换成“%20”之后的大小
+	s.resize(sOldSize + (count << 1));//之前写成sOldSize + count << 1，出错，原因是<<的优先级最低 所以要加括号，切记切记
+	int sNewSize = s.size();
+	//从后往前将空格替换为“%20”
+	for (int i = sNewSize - 1, j = sOldSize - 1; j < i; --i, --j) {
+		if (s[j] != ' ') {
+			s[i] = s[j];
+		}
+		else {
+			s[i] = 0;
+			s[i - 1] = '2';
+			s[i - 2] = '%';
+			i -= 2;
+		}
+	}
+	return s;
+}
+vector<int> jianZhiOffer::reversePrint(ListNode* head)
+{
+	ListNode* cur = head;
+	ListNode* next = NULL;
+	ListNode* pre = NULL;
+	while (cur){
+		next = cur->next;
+		cur->next = pre;
+		pre = cur;
+		cur = next;
+	}
+	ListNode* p = pre;
+	while (p) {
+		ans.emplace_back(p->val);
+		p = p->next;
+	}
+	return ans;
+}
+vector<int> jianZhiOffer::reversePrintByRecursion(ListNode* head)
+{
+	if (head == nullptr) {
+		return {};
+	}
+	reversePrintByRecursion(head->next);
+	ans.emplace_back(head->val);
+	return ans;
+}
+vector<int> jianZhiOffer::reversePrintByStack(ListNode* head)
+{
+	stack<int> s;
+
+	//入栈
+	while (head) {
+		s.push(head->val);
+		head = head->next;
+	}
+	//出栈
+	while (!s.empty()) {
+		ans.emplace_back(s.top());
+		s.pop();
+	}
+	return ans;
+}
+jianZhiOffer::TreeNode* jianZhiOffer::buildTree(vector<int>& preorder, vector<int>& inorder)
+{
+	if (preorder.empty())
+		return NULL;
+	return recursionBuild(preorder.begin(), preorder.end(), inorder.begin(), inorder.end());//传入原向量迭代器代替新建向量，节省空间
+}
+
+jianZhiOffer::TreeNode* jianZhiOffer::recursionBuild(vector<int>::iterator preBegin, vector<int>::iterator preEnnd, vector<int>::iterator inBegin, vector<int>::iterator inEnd) {
+	if (inEnd == inBegin) return NULL;
+	jianZhiOffer::TreeNode* cur = new jianZhiOffer::TreeNode(*preBegin);//新建指针指向子树先序遍历的第一个结点
+	auto root = find(inBegin, inEnd, *preBegin);//在子树的中序遍历中找到对应的，即为子树的根结点，也是子树的左右子树的分界点
+	//中序遍历的root - 中序遍历的bigin 是为了确定根结点的左子树共有多少结点,vector中iterator的end是指向最后一个元素的下一位，所以也就是题主说的类似于前闭后开
+	cur->left = recursionBuild(preBegin + 1, preBegin + 1 + (root - inBegin), inBegin, root);//根据在中序遍历中确定的根结点将中序遍历一分为二，左边是左子树，右边是右子树
+	cur->right = recursionBuild(preBegin + 1 + (root - inBegin),preEnnd,root + 1,inEnd);
+	return cur;
+}
 #pragma endregion
 
+
+
+int jianZhiOffer::minArray(vector<int>& numbers)
+{
+	if (numbers.empty()) return -1;
+	int l = 0, r = numbers.size() - 1;
+	while (l < r) {
+		int mid = l + ((r - l) >> 1);
+		while (mid < r && numbers[mid] == numbers[r]) {
+			r = r - 1;
+		}
+		if (numbers[mid] > numbers[r]) {
+			l = mid + 1;
+		}
+		else {
+			r = mid;
+		}
+	}
+	return numbers[l];
+}
 
 

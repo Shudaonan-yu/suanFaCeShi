@@ -31,6 +31,7 @@ void linkedList::createListR(aLinkList &L, int a[], int n)//尾插法
 	}
 	R->next == NULL;
 }
+//反转链表
 linkedList::aNode* linkedList::reverseLinklist(aLinkList &L)
 {   
 	aNode* pre = nullptr;
