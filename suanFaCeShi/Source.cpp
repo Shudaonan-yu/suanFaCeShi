@@ -111,8 +111,14 @@ int main()
 	vector<int> t = { 1,2,3,1,1};
 	/*int fla = test.findmin(t);*/
 	/*int te = test.minEatingSpeed(t, 8);*/
-	int te = test.shipWithinDays(t, 5);
+	//int te = test.shipWithinDays(t, 5);
 	/*int t = test.multiply(-2, 3);*/
+	vector<int> jk = { -2,0,0,2,2 };
+	vector<vector<int> > ans = test.threeSum(jk);
+
+
+
+
 	system("pause");
     return 0;
 }

@@ -166,7 +166,7 @@ public:
 	int findMinDuplicate(vector<int>& nums);
 #pragma endregion
 
-#pragma region 875.爱吃香蕉的珂珂
+#pragma region 875.爱吃香蕉的珂珂,二分法应用
 	//判断在这个给定的K速度下能不能在H时间内吃完所有的香蕉
 	bool possible(vector<int>& piles, int H, int K);
 
@@ -174,7 +174,7 @@ public:
 #pragma endregion
 
 
-#pragma region 1011 在D天内送达包裹的能力
+#pragma region 1011 在D天内送达包裹的能力，二分法应用
 	int shipWithinDays(vector<int>& weights, int D);
 	bool possible2(vector<int>& weights, int D, int C);
 #pragma endregion
@@ -203,9 +203,47 @@ public:
 	double myPow(double x, int n);
 
 	double quickMul(double x, long long N);
+
+
+	/*解法2：快速幂+迭代
+	* 每个二进制数位都有一个权值，权值如下图所示，最终结果就等于所有二进制位为1的权值之积，, 例如上述 x^77次方对应的二进制 (1001101) 和每个二进制位的权值如下
+
+1	0	0	1	1	0	1
+x^64	x^32	x^16	x^8	x^4	x^2	x^1
+
+最终结果就是所有二进制位为1的权值之积：x^1 * x^4 * x^8 * x^64 = x^77
+	*/
+	double quickMul2(double x, long long N);
+#pragma endregion
+
+#pragma region 两数之和
+	//使用哈希表
+	vector<int> twoSum(vector<int>& nums, int target);
+
 #pragma endregion
 
 
+#pragma region 15.三数之和
+	//哈斯法，双循环
+	vector<vector<int>> threeSum(vector<int>& nums);
+
+	//双指针法
+	vector<vector<int>> threeSum2(vector<int>& nums);
+
+
+	//双指针法 while
+	vector<vector<int>> threeSum3(vector<int>& nums);
+#pragma endregion
+
+	//贪心算法
+#pragma region 674 最长连续递增序列
+	int findLengthOfLCIS(vector<int>& nums);
+#pragma endregion
+
+
+#pragma region 334.递增的三元子序列
+	bool increasingTriplet(vector<int>& nums);
+#pragma endregion
 
 
 private:

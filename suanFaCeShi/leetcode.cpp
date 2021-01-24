@@ -745,7 +745,203 @@ double leetcode::quickMul(double x, long long N)
 	if (N == 0) {
 		return 1.0;
 	}
-	double ans = quickMul(x, N / 2);
-	return N %2==0?ans*ans:ans*ans*x;
+	double ans = quickMul(x, N / 2);//递归中 往上一层递归传递参数
+	return N %2==0?ans*ans:ans*ans*x;//往下一层传递该终止递归层的返回值
+}
+
+double leetcode::quickMul2(double x, long long N)
+{
+	double ans = 1.0;
+	//贡献的初始值为x
+	double x_c = x;
+	//对N进行二进制拆分的时候同时计算答案
+	while (N > 0) {
+		if (N % 2 == 1) {
+			//如果N二进制表示的最低位为1，那么需要计入贡献
+			ans *= x_c;
+		}
+		//将贡献不断地平方
+		x_c *= x_c;
+		//舍弃N二进制表示的最低位，这样我们每次只要判断最低位即可
+		N /= 2;
+	}
+	return ans;
+}
+
+//public double myPow(double x, int n) {
+//	// 迭代算法，利用二进制位
+//	if (x == 0) { // 0 的任何次方都等于 0,1 的任何次方都等于 1
+//		return x;
+//	}
+//
+//	long power = n;    // 为了保证-n不溢出，先转换成long类型
+//	if (n < 0) {         // 如果n小于0， 求1/x的-n次方
+//		power *= -1;
+//		x = 1 / x;
+//	}
+//	double weight = x;  // 权值初值为x, 即二进制位第1位的权值为x^1
+//	double res = 1;
+//	while (power != 0) {
+//		// 如果当前二进制位为1， 让结果乘上这个二进制位上的权值, 
+//		// 该位权值在上一轮迭代中已经计算出来了
+//		if ((power & 1) == 1) {
+//			res *= weight;
+//		}
+//		weight *= weight;   // 计算下一个二进制位的权值
+//		power /= 2;
+//	}
+//	return res;
+//}
+
+vector<int> leetcode::twoSum(vector<int>& nums, int target)
+{
+	if (nums.empty()) return {};
+	std::unordered_map<int, int>ans;
+	for (int i = 0; i < nums.size(); i++) {
+		auto iter = ans.find(target - nums[i]);//如果在map中找不到值，find函数返回的是end()，再次强调end()返回的是最末一个元素的下一位
+		if (iter != ans.end()) {
+			return{ iter->second,i};
+		}
+		//ans.insert(nums[i], i);//不能直接这样插入，虽然编译不报错但是运行会出错，不支持这样
+
+		ans.insert(make_pair(nums[i], i));//还可以ans.insert(pari<int,int>(nums[i], i));
+		//ans[nums[i]] = i;//因为是按数组的值来匹配的，所以用数组的值作为key
+	}
+	return {};
+}
+
+vector<vector<int>> leetcode::threeSum(vector<int>& nums)
+{
+	if (nums.empty() || nums.size() < 3) return {};
+	vector<vector<int> > result;
+	sort(nums.begin(), nums.end());//对数组排序，保证a<=b<=c 这样取了abc就不会再取bac（如果数组后面还有和a一样大的值）
+	//找出a+b+c = 0；
+	//a = nums[i],b=nums[j],c=-(a+b);
+	for (int i = 0; i < nums.size(); ++i) {
+		//排序之后如果第一个元素已经大于0
+		if (nums[0] > 0) {
+			continue;
+		}
+		if (i > 0 && nums[i] == nums[i - 1]) {//三元祖元素a去重，每一重元素相邻元素不能相同，不然可能会取到重复的三元组
+			continue;
+		}
+		unordered_set<int> set;//在a和b确定的情况下保证c不重复
+		for (int j = i + 1; j < nums.size(); j++) {
+			//为什么是j> i +　２呢　如果是ｊ　＞　ｉ　＋　１，｛０，０，０｝，就返回不了正确的答案
+			//如果三重循环 可以返回0，0，0，但是这里是两重循环，第一次执行完毕是往set存入一个值，还没有返回
+			//所以要确保能对于{0，0，0}这种能循环到底部
+			if (j > i + 2 && nums[j] == nums[j - 1] && nums[j - 1] == nums[j - 2]) continue;//b去重
+			int c = 0 - (nums[i] + nums[j]);//c=0-(a+b),
+			if (set.find(c) != set.end()) {
+				result.push_back({nums[i],nums[j],c});
+				set.erase(c);//c去重,如果不去掉c，如果极端情况数组里都是0，就会重复返回
+			}
+			else {
+				//插入的是nums[j]的值。当set中没有值等于c=0-(a+b)时，存入b的值，第二重循环继续往后找，a不变
+				//不知道数组中有没有c这个值，除非遍历，所以先把b存下来，反正b这层还要继续往后循环，如果找到新b 成立a+新b+c = 0
+				//a+b新+c1 = 0;(这个c1是set中已有的，就是之前的b） 式子转换为 a+b新 + b = 0;对比之前的a + b + c = 0;说明新找的b就是往后循环里找到的c
+				set.insert(nums[j]);//不能插入c.因为不能保证c这个值存在于数组中
+				//往set里存入nums[j]就代表着定死一个j了，相当于第二重循环，然后在接下来的循环中，边迭代地将num[j_new]插入边找能配对的c
+			}
+		}	
+	}
+	return result;
+}
+
+vector<vector<int>> leetcode::threeSum2(vector<int>& nums)
+{
+	if (nums.empty() || nums.size() < 3) return {};
+	vector<vector<int> > result;
+	sort(nums.begin(), nums.end());
+	
+	int n = nums.size();
+	for (int i = 0; i < n; ++i) {
+		if (nums[0] > 0) return {};
+		if (i > 0 && nums[i] == nums[i - 1])
+			continue;
+		int third = n - 1;//c对应的指针初始指向数组的最左边
+		
+		for (int second = i + 1; second < n; ++second) {
+			if (second > i + 1 && nums[second] == nums[second - 1])
+				continue;
+			while (second < third && nums[i] + nums[second] + nums[third] > 0) {//b应该始终小于c，保证只取abc不会重复取acb，递减寻找符合的值
+				--third;
+			}
+			// 如果指针重合，随着 b 后续的增加
+				// 就不会有满足 a+b+c=0 并且 b<c 的 c 了，可以退出循环
+			if (second == third) {
+				break;
+			}
+			if (nums[i] + nums[second] + nums[third] == 0) {
+				result.push_back({ nums[i], nums[second], nums[third] });
+			}
+
+		}
+	}
+	return result;
+}
+
+vector<vector<int>> leetcode::threeSum3(vector<int>& nums)
+{
+	int size = nums.size();
+	if (size < 3)   return {};          // 特判
+	vector<vector<int> >res;            // 保存结果（所有不重复的三元组）
+	std::sort(nums.begin(), nums.end());// 排序（默认递增）
+	for (int i = 0; i < size; i++)      // 固定第一个数，转化为求两数之和
+	{
+		if (nums[i] > 0)    return res; // 第一个数大于 0，后面都是递增正数，不可能相加为零了
+		// 去重：如果此数已经选取过，跳过
+		if (i > 0 && nums[i] == nums[i - 1])  continue;
+		// 双指针在nums[i]后面的区间中寻找和为0-nums[i]的另外两个数
+		int left = i + 1;
+		int right = size - 1;
+		while (left < right)
+		{
+			if (nums[left] + nums[right] > -nums[i])
+				right--;    // 两数之和太大，右指针左移
+			else if (nums[left] + nums[right] < -nums[i])
+				left++;     // 两数之和太小，左指针右移
+			else
+			{
+				// 找到一个和为零的三元组，添加到结果中，左右指针内缩，继续寻找
+				res.push_back(vector<int>{nums[i], nums[left], nums[right]});
+				left++;
+				right--;
+				// 去重：第二个数和第三个数也不重复选取
+				// 例如：[-4,1,1,1,2,3,3,3], i=0, left=1, right=5
+				while (left < right && nums[left] == nums[left - 1])  left++;
+				while (left < right && nums[right] == nums[right + 1])    right--;
+			}
+		}
+	}
+	return res;
+}
+
+int leetcode::findLengthOfLCIS(vector<int>& nums)
+{
+	if (nums.empty()) return 0;
+	int ans = 1;
+	int n = nums.size();
+	int start = 0;//初始的子序列开始下标
+	for (int i = 0; i < n; i++) {
+		if (i > 0 && nums[i] <= nums[i - 1]) {
+			start = i; //当前的数值小于等于前一个时，中断，更新新的start为当前的i
+		}
+		ans = max(ans, i - start + 1);
+	}
+	return ans;
+}
+
+bool leetcode::increasingTriplet(vector<int>& nums)
+{
+	if (nums.empty() || nums.size() < 3) return false;
+	int n = nums.size();
+	int one = INT_MAX, two = INT_MAX;
+	for (int three : nums) {
+		if (three > two) return true;
+		else if (three <= one) one = three;
+		else two = three;
+	}
+	return false;
 }
 
