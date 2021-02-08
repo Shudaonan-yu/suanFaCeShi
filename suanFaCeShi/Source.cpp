@@ -113,11 +113,12 @@ int main()
 	/*int te = test.minEatingSpeed(t, 8);*/
 	//int te = test.shipWithinDays(t, 5);
 	/*int t = test.multiply(-2, 3);*/
-	vector<int> jk = { -2,0,0,2,2 };
-	vector<vector<int> > ans = test.threeSum(jk);
+	/*vector<int> jk = { -2,0,0,2,2 };
+	vector<vector<int> > ans = test.threeSum(jk);*/
 
-
-
+	vector<int> v = { 4, 3 };
+	int len = test.minSubArrayLen2(7, v);
+	bool flag = test.isPalindrome(121);
 
 	system("pause");
     return 0;

@@ -10,9 +10,7 @@ public:
 	jianZhiOffer();
 	~jianZhiOffer();
 
-	//剑指 Offer 10- II. 青蛙跳台阶问题
-	int numWays(int n);
-
+	
 	//面试题08.06 汉若塔问题
 	int i = 0;
 	void move(int n, char from, char to);
@@ -156,8 +154,49 @@ public:
 	int minArray(vector<int>& numbers);
 #pragma endregion
 
+#pragma region 18.删除链表的节点
+	ListNode* deleteNode(ListNode* head, int val);
+#pragma endregion
 
-	
+
+#pragma region 10-II 青蛙跳台阶
+	int numWays(int n);
+#pragma endregion
+
+
+#pragma region 27.二叉树的镜像
+	//解法1：递归
+	/*递归
+模型：二叉树的先序遍历（遍历二叉树的所有结点）
+递归返回条件：当前结点为 NULL
+实现操作：交换根结点的左右子树
+	*/
+	TreeNode* mirrorTree(TreeNode* root);
+
+	//解法2：栈模拟
+	/*模型：栈模拟二叉树的先序遍历
+循环结束条件：栈为空
+实现操作：交换栈顶结点的左右子树
+	*/
+	TreeNode* mirrorTree2(TreeNode* root);
+
+	/*解法3：队列模拟
+模型：使用队列模拟二叉树的层次遍历
+循环结束条件：队列为空
+实现操作：交换队首结点的左右子树
+	*/
+	TreeNode* mirrorTree3(TreeNode* root);
+#pragma endregion
+
+
+#pragma region 03. 数组中重复的数字
+	//解法1：哈希法
+	int findRepeatNumber(vector<int>& nums);
+#pragma endregion
+
+
+
+
 private:
 
 

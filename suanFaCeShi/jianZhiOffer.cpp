@@ -3,6 +3,8 @@
 #include <stack>
 #include<vector>
 #include<iostream>
+#include<queue>
+#include<unordered_set>
 using namespace std;
 
 jianZhiOffer::jianZhiOffer() {};
@@ -222,5 +224,96 @@ int jianZhiOffer::minArray(vector<int>& numbers)
 	}
 	return numbers[l];
 }
+
+jianZhiOffer::ListNode* jianZhiOffer::deleteNode(ListNode* head, int val)
+{
+	ListNode* dummyHead = new ListNode(0);
+	dummyHead->next = head;
+	ListNode* cur = dummyHead;
+	while (cur->next != NULL) {
+		if (cur->next->val == val) {
+			ListNode* temp = cur->next;
+			cur->next = cur->next->next;
+			//delete temp;
+		}
+		else {
+			cur = cur->next;
+		}
+	}
+	return dummyHead->next;
+}
+
+int jianZhiOffer::numWays(int n)
+{
+	int a = 1, b = 1, sum;
+	for (int i = 0; i < n; i++) {
+		sum = (a + b) % 1000000007;
+		a = b;
+		b = sum;
+	}
+	return a;
+}
+
+jianZhiOffer::TreeNode* jianZhiOffer::mirrorTree(TreeNode* root)
+{
+	
+	if (root == NULL) return NULL;//递归终止条件，访问到了叶子节点的不存在的下一层，结束这个子递归函数的生命，开始向上返回
+	swap(root->left, root->right);//swap函数可以接受NULL值
+	mirrorTree(root->left);
+	mirrorTree(root->right);
+	return root; //向上返回当前节点,因为每个节点都已经被先交换过了，最后返回整棵树的根节点
+}
+
+jianZhiOffer::TreeNode* jianZhiOffer::mirrorTree2(TreeNode* root)
+{
+	stack<TreeNode*>s;
+	s.push(root);
+	while (!s.empty()) {
+		TreeNode* cur = s.top();
+		s.pop();
+		if (cur == NULL) {
+			continue;//当前节点为空时继续下一个循环
+		}
+		swap(cur->left, cur->right);
+		s.push(cur->left);
+		s.push(cur -> right);
+	}
+	return root;//return root等于返回整棵树
+}
+
+jianZhiOffer::TreeNode* jianZhiOffer::mirrorTree3(TreeNode* root)
+{
+	queue<TreeNode*> q;
+	q.push(root);
+	while (!q.empty()) {
+		TreeNode* cur = q.front();
+		q.pop();
+		if (cur == NULL) {
+			continue;
+		}
+		swap(cur->left, cur->right);
+		q.push(cur->left);
+		q.push(cur->right);
+	}
+	return root;
+}
+
+int jianZhiOffer::findRepeatNumber(vector<int>& nums)
+{
+	unordered_set<int>list;
+	int repeat = -1;
+	for (int i : nums) {
+		if (list.find(i) != list.end()) {
+			repeat = i;
+			break;
+		}
+		else {
+			list.insert(i);
+		}
+	}
+	return repeat;
+}
+
+
 
 

@@ -42,6 +42,12 @@
     <ClCompile Include="Source.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="tree.cpp">
+      <Filter>源文件\shuJuJieGou</Filter>
+    </ClCompile>
+    <ClCompile Include="shanDaWang.cpp">
+      <Filter>源文件\suanFa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="jianZhiOffer.h">
@@ -58,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="标头.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tree.h">
+      <Filter>头文件\shuJuJieGou</Filter>
+    </ClInclude>
+    <ClInclude Include="shanDaWang.h">
+      <Filter>头文件\suanFa</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

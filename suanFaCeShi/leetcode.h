@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include<unordered_map>
 using namespace std;
 #ifndef leetcode_H
 #define leetcode_H
@@ -245,7 +246,145 @@ x^64	x^32	x^16	x^8	x^4	x^2	x^1
 	bool increasingTriplet(vector<int>& nums);
 #pragma endregion
 
+#pragma region 2.两数相加
+	typedef struct ListNode {
+		int val;
+		ListNode* next;
+		ListNode() : val(0), next(nullptr) {}
+		ListNode(int x) : val(x), next(nullptr) {}
+		ListNode(int x, ListNode* next) : val(x), next(next) {}
+		
+	}ListNode;
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 
+	//解法2：不使用额外链表，直接在原表上修改
+	/*直接在一条链表上修改 省内存 代码简洁
+	* https://leetcode-cn.com/problems/sum-lists-lcci/solution/zhi-jie-zai-yi-tiao-lian-biao-shang-xiu-gai-sheng-/
+	*/
+	ListNode* addTwoNumbers2(ListNode* l1, ListNode* l2);
+#pragma endregion
+
+
+
+#pragma region 424. 替换后的最长重复字符
+	int characterReplacement(string s, int k);
+#pragma endregion
+
+#pragma region 461. 汉明距离
+	int hammingDistance(int x, int y);
+#pragma endregion
+
+#pragma region 1208. 尽可能使字符串相等
+
+	//解法1，前缀和加二分法
+	int equalSubstring(string s, string t, int maxCost);
+
+	int binarySearch(const vector<int>& accDiff, int endIndex, int target);
+#pragma endregion	
+
+#pragma region 4. 寻找两个正序数组的中位数
+	//解法1，折半删除区间
+	double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2);
+
+	int getKthElement(const vector<int>& nums1, const vector<int>& nums2, int k);
+#pragma endregion
+
+#pragma region 1423. 可获得的最大点数
+	//解法1，滑动窗口，让剩下的子数组取最小值，剩下的子数组的大小是固定的，用一个窗口滑
+	int maxScore(vector<int>& cardPoints, int k);
+#pragma endregion
+
+
+
+#pragma region 209.长度最小的子数组
+	int minSubArrayLen(int target, vector<int>& nums);//解法1，滑动数组
+
+
+
+	int minSubArrayLen2(int target, vector<int>& nums);//解法2，前缀和+ 二分查找
+#pragma endregion
+
+#pragma region 7整数反转
+	int reverse(int x);
+#pragma endregion
+
+
+
+#pragma region 9.回文数
+	/*解法1，将整数反转后与原数值进行比较
+	*/
+	bool isPalindrome(int x);
+
+
+	/*解法2：反转一半数字
+	*/
+	bool isPalindrome2(int x);
+#pragma endregion
+
+#pragma region 8. 字符串转换整数 (atoi)
+	/*解法1：按普通的思维去构建代码
+	*/
+	int myAtoi(string s);
+	
+
+	//解法2 自动机
+	class Automation {
+	public:
+		string state = "start";
+
+		int sign = 1;
+		long long ans = 0;
+		/*
+		*
+			' '			+/-			number			other
+start		start		signed		in_number		end
+signed		end			end			in_number		end
+in_number	end			end			in_number		end
+end			end			end			end				end
+
+		*/
+		
+		unordered_map<string, vector<string> > table = {
+	 {"start", {"start", "signed", "in_number", "end"}},
+	 {"signed", {"end", "end", "in_number", "end"}},
+	 {"in_number", {"end", "end", "in_number", "end"}},
+	 {"end", {"end", "end", "end", "end"}}
+		};
+
+	
+
+		//根据传入的字符判断返回的状态
+		int get_col(char c) {
+			if (isspace(c)) return 0;
+			if (c == '+' or c == '-')//c++也支持and or
+			return 1;
+			if (isdigit) return 2; //各种状态表示.0,1,2,3对应额是状态表里的列序号
+			return 3;
+		}
+
+		
+
+		void get(char c) {
+			state = table[state][get_col(c)];
+			if (state == "in_number") {
+				ans = ans * 10 + c - '0';
+				ans = sign == 1 ? min(ans, (long long)INT_MAX) : min(ans, -(long long)INT_MIN);
+			}
+			else if (state == "signed")
+				sign = c == '+' ? 1 : -1;
+		}
+	};
+	int myAtoi2(string s);
+#pragma endregion
+
+
+#pragma region 344. 反转字符串
+	void reverseString(vector<char>& s);
+#pragma endregion
+
+#pragma region 5. 最长回文子串
+	string longestPalindrome(string s);
+#pragma endregion
 private:
 
 };

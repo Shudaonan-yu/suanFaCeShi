@@ -5,6 +5,7 @@
 #include<math.h>
 #include<algorithm>
 #include<unordered_map>
+#include <numeric>
 using namespace std;
 
 
@@ -186,13 +187,13 @@ int leetcode::fib_recursion(int n)
 int leetcode::fib_gundong(int n)
 {
 	if (n < 2) return n;
-	int p = 0, q = 0, r = 1;
+	int p = 1, q = 2, r = 0;
 	for (int i = 2; i <= n; ++i) {
+		r = p + q;
 		p = q;
 		q = r;
-		r = p + q;
 	}
-	return r;
+	return p;
 }
 
 int leetcode::fib_tongxiang(int n)
@@ -943,5 +944,416 @@ bool leetcode::increasingTriplet(vector<int>& nums)
 		else two = three;
 	}
 	return false;
+}
+
+leetcode::ListNode* leetcode::addTwoNumbers(ListNode* l1, ListNode* l2)
+{
+	ListNode* dummyHead = new ListNode(-1), * tail = nullptr;//定义一个虚拟头结点和尾结点，尾结点是防止在遍历到最后一个结点时产生进位，这是把新位链在尾部
+	ListNode* cur = dummyHead;
+	int carry = 0;
+	while (l1 || l2) {
+		int n1 = l1 ? l1->val : 0;
+		int n2 = l2 ? l2->val : 0;
+		int sum = n1 + n2 + carry;
+		 carry = sum /10;
+		 sum = sum % 10;
+		 cur->next = new ListNode(sum);
+		 if (l1) l1 = l1->next;
+		 if (l2) l2 = l2->next;
+
+	}
+	if (carry > 0)	cur->next = new ListNode(carry);
+	
+	
+	return dummyHead->next;
+}
+
+leetcode::ListNode* leetcode::addTwoNumbers2(ListNode* l1, ListNode* l2)
+{
+	if (!l1)//只有一条链表存在就直接返回
+		return l2;
+	if (!l2)
+		return l1;
+	ListNode* dummyHead = new ListNode(-1);
+	dummyHead->next = l1;
+	ListNode* cur = dummyHead;
+
+	int carry = 0;
+	do {
+		carry += cur->next->val + (l2 == NULL ? 0 : l2->val);//l2如果比l1短，则可能在某一轮为空
+		cur->next->val = carry % 10;
+		carry /= 10;
+		if (cur->next->next == NULL && carry)//如果有进位且l1到了末尾
+			cur->next->next = (struct ListNode*)calloc(1, sizeof(struct ListNode));
+		cur = cur->next;
+		cur->next = cur->next->next;
+		if (l2)//l2可能较短
+			l2 = l2->next;
+	} while (cur->next);
+	if (l2)//如果l2较长，将剩下的节点，连接到l1的末尾
+		cur->next = l2;
+	return l1;
+}
+
+int leetcode::characterReplacement(string s, int k)
+{	
+	int len = s.length();
+	if (len < 2) return len;
+	vector<int> charCount(26);
+	//记住，我们要找的是最长子串,maxCount撑着窗口的长度
+	//维护的是历史最大字符个数，因为窗口长度是从1开始的递增
+	int maxCount = 0;//整个窗口移动过程中曾经存在的最大字符个数
+	int l = 0, r = 0;//左指针与右指针
+	while (r < len) {
+		charCount[s[r] - 'A']++;
+		maxCount = max(maxCount, charCount[s[r] - 'A']);
+		//当前窗口不符合条件时，说明当前的最大个数字符不行了，在左边界收缩的时候，右方有可能存在新的字符使得替代现在的字符成为最大个数字符，这样才能使窗口长度增长
+		if (k + maxCount < (r - l + 1)) {
+			charCount[s[l] - 'A']--;
+			l++;
+		}
+		//右边界始终在试图寻找新的更大的maxcount值替换现在的最大个数字符以实现窗口长度的增长
+		//每次区间右移，我们更新右移位置的字符出现的次数，然后尝试用它更新重复字符出现次数的历史最大值，最后我们使用该最大值计算出区间内非最长重复字符的数量，以此判断左指针是否需要右移即可
+		r++;
+	}
+	//【l，r）是最长窗口形态，而不是【l,r]
+	return r - l;
+}
+int leetcode::hammingDistance(int x, int y)
+{
+	x = x ^ y;
+	int count = 0;
+	while (x) {
+		x = x & (x - 1);
+		count++;
+	}
+	return count;
+}
+
+int leetcode::equalSubstring(string s, string t, int maxCost)
+{
+	int n = s.length();
+	//创建前缀和数组，注意accDiff(0) = 0; accDiff[1]才是s[0],可以理解为第一个下标是第一个元素的和，第0个下标是没有元素的和
+	vector<int> accDiff(n + 1,0);
+
+	//构建前缀和数组
+	for (int i = 0; i <= n; ++i) {
+		accDiff[i + 1] = accDiff[i - 1] + accDiff[i];
+	}
+	int maxLength = 0;
+	for (int i = 0; i <= n; i++) {
+		int start = binarySearch(accDiff, i, accDiff[i] - maxCost);
+		maxLength = max(maxLength, i - start );
+	}
+	return 0;
+}
+
+int leetcode::binarySearch(const vector<int>& accDiff, int endIndex, int target)
+{
+	int l = 0, r = endIndex;
+	while (l < r) {
+		int mid = l + ((r - l) >> 1);
+		if (accDiff[mid] < target) {
+			l = mid + 1;
+		}
+		else {
+			r = mid;
+		}
+	}
+	return l;
+}
+
+double leetcode::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
+{
+int totalLength = nums1.size() + nums2.size();
+if ((totalLength & 1) == 1) {
+	return getKthElement(nums1, nums2, (totalLength + 1) / 2);
+}
+else {
+	return ((double)getKthElement(nums1, nums2, totalLength / 2) + (double)getKthElement(nums1, nums2, totalLength / 2 + 1)) / 2.0;
+}
+
+}
+
+
+
+
+
+int leetcode::getKthElement(const vector<int>& nums1, const vector<int>& nums2, int k)
+{
+	/* 主要思路：要找到第 k (k>1) 小的元素，那么就取 pivot1 = nums1[k/2-1] 和 pivot2 = nums2[k/2-1] 进行比较
+		* 这里的 "/" 表示整除
+		* nums1 中小于等于 pivot1 的元素有 nums1[0 .. k/2-2] 共计 k/2-1 个
+		* nums2 中小于等于 pivot2 的元素有 nums2[0 .. k/2-2] 共计 k/2-1 个
+		* 取 pivot = min(pivot1, pivot2)，两个数组中小于等于 pivot 的元素共计不会超过 (k/2-1) + (k/2-1) <= k-2 个
+		* 这样 pivot 本身最大也只能是第 k-1 小的元素
+		* 如果 pivot = pivot1，那么 nums1[0 .. k/2-1] 都不可能是第 k 小的元素。把这些元素全部 "删除"，剩下的作为新的 nums1 数组
+		* 如果 pivot = pivot2，那么 nums2[0 .. k/2-1] 都不可能是第 k 小的元素。把这些元素全部 "删除"，剩下的作为新的 nums2 数组
+		* 由于我们 "删除" 了一些元素（这些元素都比第 k 小的元素要小），因此需要修改 k 的值，减去删除的数的个数
+		*/
+	int m = nums1.size(), n = nums2.size();
+
+	int index1 = 0, index2 = 0;//两个数组的下标起始位置
+
+	//如果是while(true),则在这个循环里一定要把所有可能的结果给return了
+	while (true) {
+		//特殊情况处理
+
+		//第一个数组为空了，说明全是小于k的元素
+		if (index1 == m) {
+			return(nums2[index2 + k - 1]);
+		}
+
+		if (index2 == n) {
+			return(nums1[index1 + k - 1]);
+		}
+		if (k == 1) {
+			return min(nums1[index1], nums2[index2]);
+		}
+
+
+
+		int newIndex1 = min(index1 + k / 2 - 1, m - 1);//每个数组上的右端位置，每次循环进行更新维护，如果越界，就取数组最右端元素
+		int newIndex2 = min(index2 + k / 2 - 1, n - 1);
+		int pivot1 = nums1[newIndex1];
+		int pivot2 = nums2[newIndex2];
+		if (pivot1 <= pivot2) {
+			k -= newIndex1 - index1 + 1;//折半删除
+			index1 = newIndex1 + 1;
+		}
+		else {
+			k -= newIndex2 - index2 + 1;
+			index2 = newIndex2 + 1;
+		}
+	}
+}
+
+int leetcode::maxScore(vector<int>& cardPoints, int k)
+{
+	int len = cardPoints.size();
+	//滑动窗口的大小为len - k
+	int windowSize = len - k;
+	//这个函数统计的区间是起始下标到终止下标的下一位，标注的是下一位，统计的还是实际区间的值
+	//选前n-k个作为初始值
+	int sum = accumulate(cardPoints.begin(), cardPoints.begin() + windowSize, 0);
+	int minSum = sum;
+	for (int i = windowSize; i < len; ++i) {
+		//滑动窗口每向右移动一格，增加从右侧进入窗口的元素值，并减少离开窗口的元素值
+		sum += cardPoints[i] - cardPoints[i - windowSize];
+		minSum = min(minSum, sum);
+	}
+	return accumulate(cardPoints.begin(), cardPoints.end(), 0) - minSum;
+}
+
+int leetcode::minSubArrayLen(int target, vector<int>& nums)
+{
+	if (nums.empty()) return 0;
+	int n = nums.size();
+	//注意在找最小值时，让初始的长度为数组长度+1，也可以令len=INT_MAX
+	int len = n +1;
+	int start = 0;
+	int end = -1;//对于这类问题，可以考虑让窗口的右边界置为-1，表示在循环开始前，窗口并不存在
+	//让窗口里的初始值先置为0
+	int sum = 0;
+	while (start < n) {
+		// 还有剩余元素未考察并且窗口内元素总和小于目标值s
+		 // sum 小于 s，窗口的右边界向前拓展，但要保证右边界 right 不越界
+		if (end + 1 < n && sum < target) {
+			end++;
+			sum += nums[end];
+		}
+		//这里是这个while循环得以终止退出的重要条件
+		//如果数组里的所有数加起来都小于目标值，右边界会一直扩大达到边缘停止扩大，然后就不会再进入上面的if判断里
+		//在下一个循环里，就开始缩小左边界直到退出while循环
+		else {
+			sum -= nums[start];
+			start++;
+		}
+		//在每次收缩左边界的时候，尝试更新最小值
+		if (sum >= target) {
+			len = min(len, end - start + 1);
+		}
+	}
+		
+	//如果没有符合目标的子数组，结果一直维持在初始值，就可以判断没有符合条件的值，返回0
+	return len == n + 1 ? 0:len;
+}
+
+int leetcode::minSubArrayLen2(int target, vector<int>& nums)
+{
+	int n = nums.size();
+	if (n == 0) {
+		return 0;
+	}
+	int ans = INT_MAX;
+	// 为了方便计算，令 size = n + 1 
+		// sums[0] = 0 意味着前 0 个元素的前缀和为 0
+		// sums[1] = A[0] 前 1 个元素的前缀和为 A[0],sun[i]是前i个元素
+		// 以此类推
+	vector<int>sums(n + 1, 0);//创建长度为n+1的前缀和数组，令第一项为0
+	for (int i = 1; i <= n; ++i) {
+		sums[i] = sums[i - 1] + nums[i - 1];//注意这里是i-1
+	 }
+	//对于一个循环里的给定下标i,在前缀和数组里找
+for (int i = 0; i <= n; ++i) {
+		int l = i, r = n;//这里的下标范围是属于前缀和数组里的范围【0，n]
+		while (l < r) {
+			int mid = l + ((r - l) >> 1);
+			if (sums[mid] - sums[i] < target) {
+				l = mid + 1;
+			}
+			else {
+				r = mid;
+			}
+		}
+		if (l < n + 1 && sums[l] - sums[i] >= target) {
+			ans = min(ans, l - 1 - i + 1);
+		}
+	}
+	return ans == INT_MAX ? 0 : ans;
+}
+
+
+
+//另外一种while结构
+//int minSubArrayLen(int s, vector<int>& nums) {
+//	int n = nums.size();
+//	if (n == 0) {
+//		return 0;
+//	}
+//	int ans = INT_MAX;
+//	int start = 0, end = 0;
+//	int sum = 0;
+//	while (end < n) {
+//		sum += nums[end];
+//		while (sum >= s) {
+//			ans = min(ans, end - start + 1);
+//			sum -= nums[start];
+//			start++;
+//		}
+//		end++;
+//	}
+//	return ans == INT_MAX ? 0 : ans;
+//}
+
+
+
+int leetcode::reverse(int x)
+{
+	int rev = 0;
+	while (x != 0) {//考虑有负数的情况，判断条件不能用x>0
+		int pop = x % 10;
+		x /= 10;
+		if(rev>INT_MAX/10 || (rev == INT_MAX/10 && pop > 7)) return 0;
+		if (rev < INT_MIN / 10 || rev == INT_MIN / 10 && pop < -8) return 0;//负数比正数的范围多1位
+		rev = rev * 10 + pop;
+	}
+	return rev;
+}
+
+bool leetcode::isPalindrome(int x)
+{
+	int temp = x;
+	if (x < 0) return false;//是负数直接返回fasle
+	int rev = 0;
+	while (x!=0) {
+		int pop = x % 10;
+		x /= 10;
+		if (rev > INT_MAX / 10 || rev == INT_MAX / 10 && pop > 7) return false;
+		rev = rev * 10 + pop;
+	}
+	return rev == temp ;
+}
+
+bool leetcode::isPalindrome2(int x)
+{// 特殊情况：
+        // 如上所述，当 x < 0 时，x 不是回文数。
+        // 同样地，如果数字的最后一位是 0，为了使该数字为回文，
+        // 则其第一位数字也应该是 0
+        // 只有 0 满足这一属性
+	if (x < 0 || x > 0 && x % 10 == 0) return false;
+
+	int revertedNUM = 0;
+	while (x > revertedNUM) {
+		revertedNUM = revertedNUM * 10 + x % 10;
+		x /= 10;
+	}
+
+	// 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。
+	   // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，
+	   // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。。
+	//如果是形如654321，执行完while循环后其值为x= 65 rev = 1234，所以通过rev/10也可以进行判断
+	return x == revertedNUM || x == revertedNUM / 10;
+}
+
+int leetcode::myAtoi(string s)
+{
+	int res = 0;//从原字符串取出的数字将要存入的结果
+	int n = s.size();
+	int i = 0;
+	int flag = 1;//数字正负判断标示
+	while (s[i] == ' ') { i++; }//注意是‘ ’表示字符空格，不能写“ ”这是常量字符串 不能何char进行比较
+	if (s[i] == '-') { flag = -1; }
+	if (s[i] == '+' || s[i] == '-') { i++; }
+	while (i < n && isdigit(s[i])) {
+		int r = s[i] - '0';//减去0的ascii码，将其转为对应的数字
+		if(res > INT_MAX / 10 || (res == INT_MAX / 10 && r > 7)) {
+			return flag > 0 ? INT_MAX : INT_MIN;
+		}
+		res = res * 10 + r;
+		i++;
+	}
+	return flag>0?res:-res;
+}
+
+int leetcode::myAtoi2(string s)
+{
+	Automation automation;
+	for (char c : s) {
+		automation.get(c);
+	}
+	return automation.sign * automation.ans;
+}
+
+void leetcode::reverseString(vector<char>& s)
+{
+	//可以直接用库函数
+	//std::reverse(s.begin(), s.end());
+	int l = 0, r = s.size() - 1;
+	while (l < r)
+	{
+		int temp = s[l];
+		s[l] = s[r];
+		s[r] = temp;
+		l++;
+		r--;
+	}
+}
+
+
+string leetcode::longestPalindrome(string s)
+{
+	int n = s.size();
+	//状态转移方程
+	vector < vector<int> >dp(n, vector<int>(n));//初始化一个二维数组，长度为n,每个元素的初始值为长度为n的vector<int>
+	string ans;
+	for (int r = 0; r < n; ++r) {
+		for (int i = 0; i + 1 < n; ++i) {
+			int j = i + 1;
+			if (r == 0) {
+				dp[i][j] = 1;
+			}
+			else if (r == 1) {
+				dp[i][j] = (s[i] == s[j]);
+			}
+			else {
+				dp[i][j] = (s[i] == s[j] && dp[i + 1][j - 1]);
+			}
+			if (dp[i][j] && r + 1 > ans.size()) {
+				ans = s.substr(i, r + 1);
+			}
+		}
+	}
+		return ans;
 }
 

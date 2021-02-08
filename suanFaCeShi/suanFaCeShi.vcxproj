@@ -141,15 +141,19 @@
   <ItemGroup>
     <ClCompile Include="ContiguousList.cpp" />
     <ClCompile Include="linkedList.cpp" />
+    <ClCompile Include="shanDaWang.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="leetcode.cpp" />
     <ClCompile Include="jianZhiOffer.cpp" />
+    <ClCompile Include="tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContiguousList.h" />
     <ClInclude Include="jianZhiOffer.h" />
     <ClInclude Include="leetcode.h" />
     <ClInclude Include="linkedList.h" />
+    <ClInclude Include="shanDaWang.h" />
+    <ClInclude Include="tree.h" />
     <ClInclude Include="标头.h" />
   </ItemGroup>
   <ItemGroup>

@@ -51,7 +51,7 @@ linkedList::aNode * linkedList::removeElements(aNode* head, int val)
 {
 	//删除头结点
 	while (head != NULL && head->data == val) {
-		aNode* tmp = head; //暂存下head
+		aNode* tmp = head; //暂存下head.可以理解为head这个指针保存了后续所有节点，这个链接不能断
 		head = head->next;
 		delete tmp;
 	}
@@ -90,7 +90,7 @@ linkedList::aNode * linkedList::removeElements_byDuumyHead(aNode * head, int val
 		}
 	}
 
-	return dummyHead->next;
+	return dummyHead->next;//记得是返回虚拟头结点的下一个
 }
 
 bool linkedList::initDlinList(dLinkList& L)
